@@ -34,7 +34,7 @@ namespace CSResults.Migrations
                     modID = module.Single(s => s.moduleID == "Test 1").moduleID,
                     modName = module.Single(s => s.moduleID == "Test 1").moduleName,
                     year = "2018/19",
-                    mean = 55.02,
+                    mean = 55.12,
                     median = 54
                 },
 
@@ -42,13 +42,13 @@ namespace CSResults.Migrations
                 {
                     modID = module.Single(s => s.moduleID == "Test 2").moduleID,
                     modName = module.Single(s => s.moduleID == "Test 2").moduleName,
-                    year = "2018/19",
-                    mean = 57.92,
+                    year = "2017/18",
+                    mean = 57.72,
                     median = 56
                 }
             };
 
-            results.ForEach(s => context.Result.AddOrUpdate(p => p.modID, s));
+            results.ForEach(s => context.Result.AddOrUpdate(p => new { p.modID,p.year }, s));
             context.SaveChanges();
 
         }
