@@ -3,7 +3,7 @@ namespace CSResults.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialTestData : DbMigration
     {
         public override void Up()
         {

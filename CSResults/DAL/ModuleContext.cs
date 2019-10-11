@@ -11,6 +11,7 @@ namespace CSResults.DAL
     {
         public ModuleContext() : base("ModuleContext")
         {
+            Database.SetInitializer<ModuleContext>(new CreateDatabaseIfNotExists<ModuleContext>());
         }
 
         public DbSet<Module> Module { get; set; }

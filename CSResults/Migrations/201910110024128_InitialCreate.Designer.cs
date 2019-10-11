@@ -13,7 +13,7 @@ namespace CSResults.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201910102214535_InitialCreate"; }
+            get { return "201910110024128_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

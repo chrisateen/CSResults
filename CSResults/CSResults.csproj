@@ -128,13 +128,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="DAL\ExamResultsDBInitializer.cs" />
     <Compile Include="DAL\ModuleContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910102214535_InitialCreate.cs" />
-    <Compile Include="Migrations\201910102214535_InitialCreate.Designer.cs">
-      <DependentUpon>201910102214535_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201910110024128_InitialCreate.cs" />
+    <Compile Include="Migrations\201910110024128_InitialCreate.Designer.cs">
+      <DependentUpon>201910110024128_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910110041564_InitialTestData.cs" />
+    <Compile Include="Migrations\201910110041564_InitialTestData.Designer.cs">
+      <DependentUpon>201910110041564_InitialTestData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Module.cs" />
@@ -200,8 +205,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910102214535_InitialCreate.resx">
-      <DependentUpon>201910102214535_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910110024128_InitialCreate.resx">
+      <DependentUpon>201910110024128_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910110041564_InitialTestData.resx">
+      <DependentUpon>201910110041564_InitialTestData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
