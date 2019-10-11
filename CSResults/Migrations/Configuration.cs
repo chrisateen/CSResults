@@ -16,11 +16,7 @@ namespace CSResults.Migrations
 
         protected override void Seed(CSResults.DAL.ModuleContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-
+            //Only update if the Module ID does not exist
             context.Module.AddOrUpdate(x => x.moduleID,
                 new Module()
                 {
