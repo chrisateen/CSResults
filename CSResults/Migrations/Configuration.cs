@@ -16,24 +16,41 @@ namespace CSResults.Migrations
 
         protected override void Seed(CSResults.DAL.ModuleContext context)
         {
-            //Only update if the Module ID does not exist
-            context.Module.AddOrUpdate(x => x.moduleID,
-                new Module()
-                {
-                    moduleID = "Test",
-                    moduleName = "Test Data",
-                    Results = new List<Result>
-                {
-                    new Result()
-                    {
-                        modName = "Test Data",
-                        year = "2017/18",
-                        mean = 52.5
-                    }
-                }
 
+            var module = new List<Module>
+            {
+                new Module{moduleID = "Test 1", moduleName = "Test 1 Module"},
+                new Module{moduleID = "Test 2", moduleName = "Test 2 Module"}
+
+            };
+
+            module.ForEach(s => context.Module.AddOrUpdate(p => p.moduleID, s));
+            context.SaveChanges();
+
+            var results = new List<Result>
+            {
+                new Result
+                {
+                    modID = module.Single(s => s.moduleID == "Test 1").moduleID,
+                    modName = module.Single(s => s.moduleID == "Test 1").moduleName,
+                    year = "2018/19",
+                    mean = 55.02,
+                    median = 54
+                },
+
+                 new Result
+                {
+                    modID = module.Single(s => s.moduleID == "Test 2").moduleID,
+                    modName = module.Single(s => s.moduleID == "Test 2").moduleName,
+                    year = "2018/19",
+                    mean = 57.92,
+                    median = 56
                 }
-                );
+            };
+
+            results.ForEach(s => context.Result.AddOrUpdate(p => p.modID, s));
+            context.SaveChanges();
+
         }
     }
 }
