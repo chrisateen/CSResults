@@ -6,6 +6,7 @@ namespace CSResults.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using LoadData;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CSResults.DAL.ModuleContext>
     {
@@ -16,6 +17,15 @@ namespace CSResults.Migrations
 
         protected override void Seed(CSResults.DAL.ModuleContext context)
         {
+            string path = @"../../../Results.xlsx";
+            string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1;\"";
+
+            // Select all data from the results worksheet where there is enough data
+            string selectString = "SELECT * FROM [Results$] WHERE [% 0_30] <> 'Fewer than 10 enrolled'" +
+                                    "AND [% 0_30] <> 'Not enough info'";
+
+            LoadExceltoDB.getDataFromExcel(connectionString,selectString);
+
 
             var module = new List<Module>
             {

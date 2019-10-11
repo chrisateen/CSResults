@@ -54,7 +54,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.OleDb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.OleDb.4.6.0\lib\net461\System.Data.OleDb.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,11 +132,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="DAL\ExamResultsDBInitializer.cs" />
     <Compile Include="DAL\ModuleContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LoadData\LoadExceltoDB.cs" />
     <Compile Include="Migrations\201910110024128_InitialCreate.cs" />
     <Compile Include="Migrations\201910110024128_InitialCreate.Designer.cs">
       <DependentUpon>201910110024128_InitialCreate.cs</DependentUpon>
