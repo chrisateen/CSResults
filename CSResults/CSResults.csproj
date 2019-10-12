@@ -145,6 +145,10 @@
     <Compile Include="Migrations\201910110041564_InitialTestData.Designer.cs">
       <DependentUpon>201910110041564_InitialTestData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910112226481_seedTest.cs" />
+    <Compile Include="Migrations\201910112226481_seedTest.Designer.cs">
+      <DependentUpon>201910112226481_seedTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Result.cs" />
@@ -214,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910110041564_InitialTestData.resx">
       <DependentUpon>201910110041564_InitialTestData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910112226481_seedTest.resx">
+      <DependentUpon>201910112226481_seedTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
