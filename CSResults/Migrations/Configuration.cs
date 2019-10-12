@@ -19,7 +19,7 @@ namespace CSResults.Migrations
         protected override void Seed(CSResults.DAL.ModuleContext context)
         {
             //Debugger added to enable me to debug the seed method
-            if (System.Diagnostics.Debugger.IsAttached == false) { System.Diagnostics.Debugger.Launch(); }
+           // if (System.Diagnostics.Debugger.IsAttached == false) { System.Diagnostics.Debugger.Launch(); }
            
             string path = @"C:/Users/no_ot/Documents/CSResults/CSResults/LoadData/Results.xlsx";
             string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1;\"";
@@ -33,6 +33,7 @@ namespace CSResults.Migrations
 
             foreach (System.Data.DataTable table in excelDS.Tables)
             {
+                //Loop through each row to store each row into the database
                 foreach (DataRow row in table.Rows)
                 {
                     Module md = new Module()
@@ -51,8 +52,10 @@ namespace CSResults.Migrations
                         modName = row["Module Name"].ToString(),
                         year = row["Year"].ToString(),
                         mean = Convert.ToDouble(row["Average"].ToString()),
-                        median = Convert.ToDouble(row["Median"].ToString())
-                    };
+                        median = Convert.ToDouble(row["Median"].ToString()),
+                        //Removes the character % from the percentage and converts percentage number to decimal
+                        below30 = Convert.ToDouble(row["% 0_30"].ToString().Substring(0, row["% 0_30"].ToString().Length - 1)) / 100
+                };
 
                     //Adds the module results if it does not exist in the databse
                     context.Result.AddOrUpdate(x => new { x.modID,x.year },res);
