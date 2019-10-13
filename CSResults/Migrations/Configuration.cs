@@ -3,11 +3,11 @@ namespace CSResults.Migrations
     using CSResults.LoadData;
     using CSResults.Models;
     using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using System.IO;
+
+
 
     internal sealed class Configuration : DbMigrationsConfiguration<CSResults.DAL.ModuleContext>
     {
@@ -19,9 +19,14 @@ namespace CSResults.Migrations
         protected override void Seed(CSResults.DAL.ModuleContext context)
         {
             //Debugger added to enable me to debug the seed method
-           // if (System.Diagnostics.Debugger.IsAttached == false) { System.Diagnostics.Debugger.Launch(); }
-           
-            string path = @"C:/Users/no_ot/Documents/CSResults/CSResults/LoadData/Results.xlsx";
+            //if (System.Diagnostics.Debugger.IsAttached == false) { System.Diagnostics.Debugger.Launch(); }
+
+
+            //Gets the path of the root project folder
+            DirectoryInfo info = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            string rootpath = info.Parent.FullName;
+            string path = Path.Combine(rootpath, @"LoadData\Results.xlsx");
+
             string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1;\"";
 
             // Select all data from the results worksheet where there is enough data
@@ -54,8 +59,9 @@ namespace CSResults.Migrations
                         mean = Convert.ToDouble(row["Average"].ToString()),
                         median = Convert.ToDouble(row["Median"].ToString()),
                         //Removes the character % from the percentage and converts percentage number to decimal
-                        below30 = Convert.ToDouble(row["% 0_30"].ToString().Substring(0, row["% 0_30"].ToString().Length - 1)) / 100
-                };
+                        below30 = Convert.ToDouble(row["% 0_30"].ToString().Substring(0, row["% 0_30"].ToString().Length - 1)) / 100,
+                        above80 = Convert.ToDouble(row["% 80 +"].ToString().Substring(0, row["% 80 +"].ToString().Length - 1)) / 100
+                    };
 
                     //Adds the module results if it does not exist in the databse
                     context.Result.AddOrUpdate(x => new { x.modID,x.year },res);
