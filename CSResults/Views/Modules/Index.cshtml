@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CSResults.Models.ResultsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.module.moduleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.result.year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.result.mean)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.module.moduleName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.result.year)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.result.mean)
+    </td>
+</tr>
+     
+
+    }
+
+</table>

@@ -37,7 +37,7 @@ namespace CSResults.Models
 
         public double ?above80 { get; set; }
         public string modID { get; set; }
-        public Module Module { get; set; }
+        public virtual Module Module { get; set; }
 
     }
 }

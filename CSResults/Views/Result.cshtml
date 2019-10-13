@@ -1,0 +1,88 @@
+﻿@model IEnumerable<CSResults.Models.Result>
+
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Result</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mean)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.median)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.below30)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.below40)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.below50)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.below60)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.below70)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.below80)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.above80)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.mean)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.median)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.below30)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.below40)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.below50)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.below60)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.below70)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.below80)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.above80)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

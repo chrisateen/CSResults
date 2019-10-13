@@ -131,7 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="DAL\ModuleContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -149,9 +149,14 @@
     <Compile Include="Migrations\201910112226481_seedTest.Designer.cs">
       <DependentUpon>201910112226481_seedTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910131505466_Add virtual Module in Result.cs" />
+    <Compile Include="Migrations\201910131505466_Add virtual Module in Result.Designer.cs">
+      <DependentUpon>201910131505466_Add virtual Module in Result.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\ResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,11 +195,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Module\Create.cshtml" />
-    <Content Include="Views\Module\Delete.cshtml" />
-    <Content Include="Views\Module\Details.cshtml" />
-    <Content Include="Views\Module\Edit.cshtml" />
-    <Content Include="Views\Module\Index.cshtml" />
+    <Content Include="Views\Result.cshtml" />
+    <Content Include="Views\Modules\Create.cshtml" />
+    <Content Include="Views\Modules\Delete.cshtml" />
+    <Content Include="Views\Modules\Details.cshtml" />
+    <Content Include="Views\Modules\Edit.cshtml" />
+    <Content Include="Views\Modules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910112226481_seedTest.resx">
       <DependentUpon>201910112226481_seedTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910131505466_Add virtual Module in Result.resx">
+      <DependentUpon>201910131505466_Add virtual Module in Result.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

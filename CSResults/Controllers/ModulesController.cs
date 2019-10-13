@@ -11,17 +11,25 @@ using CSResults.Models;
 
 namespace CSResults.Controllers
 {
-    public class ModuleController : Controller
+    public class ModulesController : Controller
     {
         private ModuleContext db = new ModuleContext();
 
-        // GET: Module
+        // GET: Modules
         public ActionResult Index()
         {
-            return View(db.Module.ToList());
+
+            List<Module> moduleLst = db.Module.ToList();
+            List<Result> resultLst = db.Result.ToList();
+
+            var modRes = from m in moduleLst
+                         join r in resultLst on m.moduleID equals r.modID
+                         select new ResultsViewModel { module = m, result = r };
+
+            return View(modRes);
         }
 
-        // GET: Module/Details/5
+        // GET: Modules/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,13 +44,13 @@ namespace CSResults.Controllers
             return View(module);
         }
 
-        // GET: Module/Create
+        // GET: Modules/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Module/Create
+        // POST: Modules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,7 +67,7 @@ namespace CSResults.Controllers
             return View(module);
         }
 
-        // GET: Module/Edit/5
+        // GET: Modules/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -74,7 +82,7 @@ namespace CSResults.Controllers
             return View(module);
         }
 
-        // POST: Module/Edit/5
+        // POST: Modules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -90,7 +98,7 @@ namespace CSResults.Controllers
             return View(module);
         }
 
-        // GET: Module/Delete/5
+        // GET: Modules/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -105,7 +113,7 @@ namespace CSResults.Controllers
             return View(module);
         }
 
-        // POST: Module/Delete/5
+        // POST: Modules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
