@@ -55,16 +55,23 @@ namespace CSResults.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "moduleID,moduleName")] Module module)
+        public ActionResult Create(ResultsViewModel results)
         {
             if (ModelState.IsValid)
             {
-                db.Module.Add(module);
+                db.Module.Add(results.module);
+                db.SaveChanges();
+
+                //Creates link between the module object and result object
+                results.result.modID = results.module.moduleID;
+                results.result.modName = results.module.moduleName;
+
+                db.Result.Add(results.result);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(module);
+            return View(results);
         }
 
         // GET: Modules/Edit/5
