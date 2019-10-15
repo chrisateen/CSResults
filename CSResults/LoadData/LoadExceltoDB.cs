@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.OleDb;
 using System.Data;
+using System.IO;
 
 namespace CSResults.LoadData
 {
@@ -44,6 +45,17 @@ namespace CSResults.LoadData
             }
 
             return dataSet;
+        }
+
+        //Gets the root path of the project and combine it with the specified path ending to get the file path of the dataset
+        public static string getDataPath(String pathEnding)
+        {
+            //Gets the path of the root project folder
+            DirectoryInfo info = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
+            string rootpath = info.Parent.FullName;
+
+            //Combines the root folder with the path ending to return the full filepath
+            return Path.Combine(rootpath, pathEnding);
         }
     }
 }

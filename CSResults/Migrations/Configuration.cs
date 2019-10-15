@@ -22,10 +22,9 @@ namespace CSResults.Migrations
             //if (System.Diagnostics.Debugger.IsAttached == false) { System.Diagnostics.Debugger.Launch(); }
 
 
-            //Gets the path of the root project folder
-            DirectoryInfo info = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
-            string rootpath = info.Parent.FullName;
-            string path = Path.Combine(rootpath, @"LoadData\Results.xlsx");
+            //Gets the path of where the excel file is
+            string path = LoadExceltoDB.getDataPath("LoadData\\Results.xlsx");
+
 
             string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + path + ";Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1;\"";
 
