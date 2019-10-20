@@ -36,6 +36,7 @@ namespace CSResults.Controllers
 
             var modRes = from m in moduleLst
                          join r in resultLst on m.moduleID equals r.modID
+                         where m.moduleName == "Introduction to Software Development"
                          select new ResultsViewModel { module = m, result = r };
 
             return View(modRes);
