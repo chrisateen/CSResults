@@ -29,6 +29,18 @@ namespace CSResults.Controllers
             return View(modRes);
         }
 
+        public ActionResult Graph()
+        {
+            List<Module> moduleLst = db.Module.ToList();
+            List<Result> resultLst = db.Result.ToList();
+
+            var modRes = from m in moduleLst
+                         join r in resultLst on m.moduleID equals r.modID
+                         select new ResultsViewModel { module = m, result = r };
+
+            return View(modRes);
+        }
+
         // GET: Modules/Details/5
         public ActionResult Details(string id)
         {

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CSResults.Models.ResultsViewModel>
+@{
+    ViewBag.Title = "Graph";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Graph</h2>
+
+
+<div class="container">
+    <canvas id="lineChart"></canvas>
+</div>
+
+<script src="~/Scripts/LineChart.js"></script>
