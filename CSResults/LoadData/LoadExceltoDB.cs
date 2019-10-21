@@ -91,31 +91,10 @@ namespace CSResults.LoadData
                     //Get the equivalent result object property name
                     string resProp = dict[colName];
 
-                    PropertyInfo prop = res.GetType().GetProperty(resProp);
+                    string data = row[colName].ToString();
 
-                    //Checks if the property of the data we are storing is a nullable double
-                    if (prop.PropertyType == typeof(Nullable<Double>))
-                    {
-                        string data = row[colName].ToString();
-
-                        //Checks if the data is a percentage
-                        if (data.Contains("%"))
-                        {
-                            //Removes the character % from the percentage and converts percentage number to decimal
-                            double? dataPercent = Convert.ToDouble(data.Substring(0, data.Length - 1)) / 100;
-                            prop.SetValue(res, dataPercent);
-                        }
-                        else
-                        {
-                            double? dataNo = Convert.ToDouble(data);
-                            prop.SetValue(res, dataNo);
-                        }
-
-                    }
-                    else
-                    {
-                        prop.SetValue(res, row[colName].ToString());
-                    }
+                    //Assign current data in datatable to result object
+                    setProp(res, resProp, data);
 
                 }
 
@@ -123,6 +102,36 @@ namespace CSResults.LoadData
             //Adds the module results if it does not exist in the databse
             context.Result.AddOrUpdate(x => new { x.modID, x.year }, res);
             context.SaveChanges();
+
+        }
+
+        //Assigns data to specified property in the result object
+        public static void setProp (Result result, string propName, string data)
+        {
+            PropertyInfo prop = result.GetType().GetProperty(propName);
+
+            //Checks if the property of the data we are storing is a nullable double
+            if (prop.PropertyType == typeof(Nullable<Double>))
+            {
+
+                //Checks if the data is a percentage
+                if (data.Contains("%"))
+                {
+                    //Removes the character % from the percentage and converts percentage number to decimal
+                    double? dataPercent = Convert.ToDouble(data.Substring(0, data.Length - 1)) / 100;
+                    prop.SetValue(result, dataPercent);
+                }
+                else
+                {
+                    double? dataNo = Convert.ToDouble(data);
+                    prop.SetValue(result, dataNo);
+                }
+
+            }
+            else
+            {
+                prop.SetValue(result, data);
+            }
 
         }
 
