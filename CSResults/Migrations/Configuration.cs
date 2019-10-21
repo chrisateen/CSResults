@@ -3,6 +3,7 @@ namespace CSResults.Migrations
     using CSResults.LoadData;
     using CSResults.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.Entity.Migrations;
     using System.IO;
@@ -35,20 +36,27 @@ namespace CSResults.Migrations
             //Gets excel data and store in a dataset
             DataSet excelDS = LoadExceltoDB.getDataFromExcel(connectionString, selectString);
 
+            IDictionary<string, string> dict = new Dictionary<string, string>() {
+                                                {"Module Code","modID"},
+                                                {"Module Name", "modName"},
+                                                {"Year","year"},
+                                                {"Average","mean" },
+                                                { "Median" ,"median"},
+                                                {"% 0_30","below30" },
+                                                {"% 30_39","below40" },
+                                                {"% 40_49","below50" },
+                                                {"% 50_59","below60" },
+                                                {"% 60_69","below70" },
+                                                {"%70_79","below80" },
+                                                {"% 80 +","above80" }
+            };
+
             foreach (System.Data.DataTable table in excelDS.Tables)
             {
                 //Loop through each row to store each row into the database
                 foreach (DataRow row in table.Rows)
                 {
-                    Module md = new Module()
-                    {
-                        moduleID = row["Module Code"].ToString(),
-                        moduleName = row["Module Name"].ToString()
-                    };
-                    //Adds the module name and code if it does not exist in the databse
-                    context.Module.AddOrUpdate(x => x.moduleID,md);
-                    
-                    context.SaveChanges();
+                    LoadExceltoDB.saveModule(row, context);
 
                     Result res = new Result()
                     {

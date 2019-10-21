@@ -5,6 +5,8 @@ using System.Web;
 using System.Data.OleDb;
 using System.Data;
 using System.IO;
+using CSResults.Models;
+using System.Data.Entity.Migrations;
 
 namespace CSResults.LoadData
 {
@@ -57,5 +59,20 @@ namespace CSResults.LoadData
             //Combines the root folder with the path ending to return the full filepath
             return Path.Combine(rootpath, pathEnding);
         }
+
+        public static void saveModule(DataRow row, CSResults.DAL.ModuleContext context)
+        {
+            Module md = new Module()
+            {
+                moduleID = row["Module Code"].ToString(),
+                moduleName = row["Module Name"].ToString()
+            };
+            //Adds the module name and code if it does not exist in the databse
+            context.Module.AddOrUpdate(x => x.moduleID, md);
+
+            context.SaveChanges();
+        }
+
+
     }
 }
