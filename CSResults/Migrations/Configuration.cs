@@ -36,7 +36,8 @@ namespace CSResults.Migrations
             //Gets excel data and store in a dataset
             DataSet excelDS = LoadExceltoDB.getDataFromExcel(connectionString, selectString);
 
-            IDictionary<string, string> dict = new Dictionary<string, string>() {
+
+            IDictionary<string, string> resultHeaders = new Dictionary<string, string>() {
                                                 {"Module Code","modID"},
                                                 {"Module Name", "modName"},
                                                 {"Year","year"},
@@ -56,23 +57,11 @@ namespace CSResults.Migrations
                 //Loop through each row to store each row into the database
                 foreach (DataRow row in table.Rows)
                 {
+                    //Saves the data for the modules table
                     LoadExceltoDB.saveModule(row, context);
 
-                    Result res = new Result()
-                    {
-                        modID = row["Module Code"].ToString(),
-                        modName = row["Module Name"].ToString(),
-                        year = row["Year"].ToString(),
-                        mean = Convert.ToDouble(row["Average"].ToString()),
-                        median = Convert.ToDouble(row["Median"].ToString()),
-                        //Removes the character % from the percentage and converts percentage number to decimal
-                        below30 = Convert.ToDouble(row["% 0_30"].ToString().Substring(0, row["% 0_30"].ToString().Length - 1)) / 100,
-                        above80 = Convert.ToDouble(row["% 80 +"].ToString().Substring(0, row["% 80 +"].ToString().Length - 1)) / 100
-                    };
-
-                    //Adds the module results if it does not exist in the databse
-                    context.Result.AddOrUpdate(x => new { x.modID,x.year },res);
-                    context.SaveChanges();
+                    //Saves the data for the results table
+                    LoadExceltoDB.saveResult(row,table ,context, resultHeaders);
                 }
             }
             

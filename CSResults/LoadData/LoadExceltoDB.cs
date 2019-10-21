@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using CSResults.Models;
 using System.Data.Entity.Migrations;
+using System.Reflection;
 
 namespace CSResults.LoadData
 {
@@ -60,9 +61,10 @@ namespace CSResults.LoadData
             return Path.Combine(rootpath, pathEnding);
         }
 
+        //Saves the module data to the database using the module object
         public static void saveModule(DataRow row, CSResults.DAL.ModuleContext context)
         {
-            Module md = new Module()
+            Models.Module md = new Models.Module()
             {
                 moduleID = row["Module Code"].ToString(),
                 moduleName = row["Module Name"].ToString()
@@ -71,6 +73,57 @@ namespace CSResults.LoadData
             context.Module.AddOrUpdate(x => x.moduleID, md);
 
             context.SaveChanges();
+        }
+
+        //Saves the results data to the database using the result object
+        public static void saveResult (DataRow row, DataTable tbl, CSResults.DAL.ModuleContext context, IDictionary<string, string> dict)
+        {
+            
+            Result res = new Result();
+
+            foreach (DataColumn column in tbl.Columns)
+            {
+                //Get the column name
+                string colName = column.ColumnName.ToString();
+
+                if (dict.ContainsKey(colName))
+                {
+                    //Get the equivalent result object property name
+                    string resProp = dict[colName];
+
+                    PropertyInfo prop = res.GetType().GetProperty(resProp);
+
+                    //Checks if the property of the data we are storing is a nullable double
+                    if (prop.PropertyType == typeof(Nullable<Double>))
+                    {
+                        string data = row[colName].ToString();
+
+                        //Checks if the data is a percentage
+                        if (data.Contains("%"))
+                        {
+                            //Removes the character % from the percentage and converts percentage number to decimal
+                            double? dataPercent = Convert.ToDouble(data.Substring(0, data.Length - 1)) / 100;
+                            prop.SetValue(res, dataPercent);
+                        }
+                        else
+                        {
+                            double? dataNo = Convert.ToDouble(data);
+                            prop.SetValue(res, dataNo);
+                        }
+
+                    }
+                    else
+                    {
+                        prop.SetValue(res, row[colName].ToString());
+                    }
+
+                }
+
+            }
+            //Adds the module results if it does not exist in the databse
+            context.Result.AddOrUpdate(x => new { x.modID, x.year }, res);
+            context.SaveChanges();
+
         }
 
 
