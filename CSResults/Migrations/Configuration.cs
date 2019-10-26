@@ -61,7 +61,7 @@ namespace CSResults.Migrations
                     LoadExceltoDB.saveModule(row, context);
 
                     //Saves the data for the results table
-                    LoadExceltoDB.saveResult(row,table ,context, resultHeaders);
+                    LoadExceltoDB.saveResult(row,context, resultHeaders);
                 }
             }
             

@@ -76,29 +76,19 @@ namespace CSResults.LoadData
         }
 
         //Saves the results data to the database using the result object
-        public static void saveResult (DataRow row, DataTable tbl, CSResults.DAL.ModuleContext context, IDictionary<string, string> dict)
+        public static void saveResult (DataRow row, CSResults.DAL.ModuleContext context, IDictionary<string, string> dict)
         {
             
             Result res = new Result();
 
-            foreach (DataColumn column in tbl.Columns)
-            {
-                //Get the column name
-                string colName = column.ColumnName.ToString();
+            foreach (var item in dict){
 
-                if (dict.ContainsKey(colName))
-                {
-                    //Get the equivalent result object property name
-                    string resProp = dict[colName];
-
-                    string data = row[colName].ToString();
-
-                    //Assign current data in datatable to result object
-                    setProp(res, resProp, data);
-
-                }
-
+                //Gets the data and the resulting property name from the dictionary
+                string data = row[item.Key].ToString();
+                string resProp = item.Value;
+                setProp(res, resProp, data);
             }
+
             //Adds the module results if it does not exist in the databse
             context.Result.AddOrUpdate(x => new { x.modID, x.year }, res);
             context.SaveChanges();
