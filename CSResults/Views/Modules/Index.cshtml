@@ -18,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.result.mean)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.result.median)
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -31,6 +34,9 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.result.mean)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.result.median)
     </td>
 </tr>
      

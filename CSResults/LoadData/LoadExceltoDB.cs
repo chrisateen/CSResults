@@ -113,7 +113,7 @@ namespace CSResults.LoadData
                 }
                 else
                 {
-                    double? dataNo = Convert.ToDouble(data);
+                    double? dataNo = Math.Round(Convert.ToDouble(data),2);
                     prop.SetValue(result, dataNo);
                 }
 
