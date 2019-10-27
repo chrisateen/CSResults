@@ -22,11 +22,16 @@ namespace CSResults
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/site.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/chart").Include(
                      "~/Scripts/chart.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/bootstrapTable").Include(
+               "~/Content/bootstrap-table.min.css",
+               "~/Content/bootstrap-table-fixed-columns.css"));
 
         }
     }
