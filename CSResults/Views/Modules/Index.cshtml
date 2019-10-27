@@ -7,8 +7,13 @@
 @Scripts.Render("~/bundles/jquery")
 
 <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
+<link href="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/fixed-columns/bootstrap-table-fixed-columns.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/fixed-columns/bootstrap-table-fixed-columns.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
 <h2>Results for all Modules</h2>
 
@@ -20,7 +25,11 @@
        data-search="true"
        data-show-columns="true"
        data-sortable="true"
-       data-pagination="true">
+       data-pagination="true"
+       data-fixed-columns="true"
+       data-fixed-number=2
+       data-show-export="true"
+       data-export-data-type="all">
     <thead>
         <tr id="title">
 
