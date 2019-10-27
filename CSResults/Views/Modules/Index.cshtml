@@ -4,93 +4,94 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/dataTable")
+
+
 <script src="~/Scripts/Table.js"></script>
 <h2>Results for all Modules</h2>
 
 <br>
 
-<input class ="form-control form-control-lg" type="text" id="resultsSearch" placeholder="Search by any field...">
-
-<br>
-<br>
-
 <table class="table" id="resultsTable">
-    <tr id="title">
-        <th>
-            @Html.DisplayNameFor(model => model.module.moduleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.mean)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.median)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.below30)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.below40)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.below50)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.below60)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.below70)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.below80)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.result.above80)
-        </th>
-    </tr>
+    <thead>
+        <tr id="title">
 
-    @foreach (var item in Model)
-    {
-        <tr id="body">
-            <td>
-                @Html.DisplayFor(modelItem => item.module.moduleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.mean)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.median)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.below30)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.below40)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.below50)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.below60)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.below70)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.below80)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.result.above80)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.module.moduleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.mean)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.median)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.below30)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.below40)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.below50)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.below60)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.below70)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.below80)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.result.above80)
+            </th>
         </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="body">
+                <td>
+                    @Html.DisplayFor(modelItem => item.module.moduleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.mean)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.median)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.below30)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.below40)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.below50)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.below60)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.below70)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.below80)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.result.above80)
+                </td>
+            </tr>
 
 
-    }
-
+        }
+    </tbody>
 </table>
-

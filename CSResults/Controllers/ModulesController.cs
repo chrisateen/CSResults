@@ -15,7 +15,6 @@ namespace CSResults.Controllers
     {
         private ModuleContext db = new ModuleContext();
 
-        // GET: Modules
         public ActionResult Index()
         {
 
@@ -24,6 +23,7 @@ namespace CSResults.Controllers
 
             var modRes = from m in moduleLst
                          join r in resultLst on m.moduleID equals r.modID
+                         orderby m.moduleName,r.year descending
                          select new ResultsViewModel { module = m, result = r };
 
             return View(modRes);
@@ -42,7 +42,6 @@ namespace CSResults.Controllers
             return View(modRes);
         }
 
- 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -52,4 +51,6 @@ namespace CSResults.Controllers
             base.Dispose(disposing);
         }
     }
+
 }
+
