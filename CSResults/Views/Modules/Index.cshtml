@@ -5,49 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/dataTable")
 
+<link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
 
-<script src="~/Scripts/Table.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
 <h2>Results for all Modules</h2>
 
 <br>
 
-<table class="table" id="resultsTable">
+<table 
+       id="resultsTable"
+       data-toggle="table"
+       data-search="true"
+       data-show-columns="true"
+       data-sortable="true"
+       data-pagination="true">
     <thead>
         <tr id="title">
 
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.module.moduleName)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.year)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.mean)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.median)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.below30)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.below40)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.below50)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.below60)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.below70)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.below80)
             </th>
-            <th>
+            <th data-sortable="true">
                 @Html.DisplayNameFor(model => model.result.above80)
             </th>
         </tr>
