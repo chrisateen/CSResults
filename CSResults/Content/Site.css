@@ -1,5 +1,4 @@
 ﻿body {
-    /*padding-top: 50px;*/
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
 }
@@ -17,10 +16,25 @@
     white-space: normal;
 }
 
-nav {
+.sidebar {
     background-color: #34495E;
+    height: 100vh;
 }
 
-.navtext{
-   color: white;
+.sidebar-header {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-bottom-style: double;
+    border-bottom-color: white;
 }
+
+.sidebar-items {
+    list-style-type: none;
+    left: 70px;
+}
+
+.sidebar-text a, .sidebar-text i, .sidebar-text a:hover, .sidebar-text a:active, .sidebar-text a:visited {
+    color: white;
+}
+

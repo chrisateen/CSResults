@@ -8,31 +8,56 @@
     @Scripts.Render("~/bundles/chart")
     @Scripts.Render("~/bundles/popper")
     @Styles.Render("~/Content/css")
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <!-- Start of NavBar-->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand navtext" @Html.ActionLink("CS Results", "Index")</a>
+    <!-- NavBar which contains the sidebar-->
+    <nav class="navbar navbar-expand-lg">
+
         <button class="navbar-toggler ml-auto navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link navtext" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
+        <div class="collapse navbar-collapse" id="navbar-items">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!--Sidebar-->
+                    <div class="col-lg-2 fixed-top sidebar sidebar-text">
+
+                        <div class="sidebar-header">
+                            <a class="navbar-brand" @Html.ActionLink("CS Results", "Index", "Home")</a>
+                        </div>
+                        
+                        <ul class="sidebar-items">
+                            <li>
+                                <i class="fa fa-table fa-fw" aria-hidden="true"></i> <a>@Html.ActionLink("Results Table", "Index", "Modules")</a>
+                            </li>
+           
+                        </ul>
+
+                    </div>
+
+                    <!--The rest of the Navigation bar-->
+
+                    <div class="col-lg-10" id="non-sidebar-items">
+
+                    </div>
+
+
+                </div>
+            </div>
         </div>
     </nav>
     <br>
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - CS Results</p>
         </footer>
     </div>
 
