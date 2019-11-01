@@ -17,7 +17,6 @@
 }
 
 .sidebar {
-    background-color: #34495E;
     height: 100vh;
 }
 
@@ -34,7 +33,8 @@
     left: 70px;
 }
 
-.sidebar-text a, .sidebar-text i, .sidebar-text a:hover, .sidebar-text a:active, .sidebar-text a:visited {
+.site-bar, .site-bar i, .site-bar a:hover, .site-bar a:active, .site-bar a:visited {
     color: white;
+    background-color: #34495E;
 }
 

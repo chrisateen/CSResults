@@ -19,12 +19,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbar-items">
+        <div class="collapse navbar-collapse">
             <div class="container-fluid">
                 <div class="row">
 
                     <!--Sidebar-->
-                    <div class="col-lg-2 fixed-top sidebar sidebar-text">
+                    <div class="col-lg-2 fixed-top sidebar site-bar">
 
                         <div class="sidebar-header">
                             <a class="navbar-brand" @Html.ActionLink("CS Results", "Index", "Home")</a>
@@ -40,11 +40,19 @@
                     </div>
 
                     <!--The rest of the Navigation bar-->
+                    <div class="col-lg-10 ml-auto fixed-top site-bar py-3">
 
-                    <div class="col-lg-10" id="non-sidebar-items">
+                        <div class="row">
+
+                            <div class="col-md-11">
+                            </div>
+                            <div class="col-md-1">
+                                <a class="about" @Html.ActionLink("About", "Index", "Home")</a>
+                            </div>
+
+                        </div>
 
                     </div>
-
 
                 </div>
             </div>
