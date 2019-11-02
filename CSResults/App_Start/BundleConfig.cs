@@ -11,6 +11,9 @@ namespace CSResults
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-3.3.1.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/argon").Include(
+                       "~/Scripts/argon-dashboard.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -21,7 +24,8 @@ namespace CSResults
                       "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
+                      //"~/Content/bootstrap.min.css",
+                      "~/Content/argon-dashboard.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/Site.css"
                       ));

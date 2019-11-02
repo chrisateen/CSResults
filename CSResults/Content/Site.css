@@ -1,40 +1,22 @@
-﻿body {
-    padding-bottom: 20px;
-    font-family: 'Roboto', sans-serif;
+﻿li {
+    margin-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.nav-item {
+    padding-left: 10px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.top-row-nav {
+    background-color: #dec3c3;
 }
 
-.sidebar {
-    height: 100vh;
+.top-row-nav-text {
+    font-weight: bold;
+    font-size: large;
+    text-transform: uppercase;
 }
 
-.sidebar-header {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    border-bottom-style: double;
-    border-bottom-color: white;
-}
-
-.sidebar-items {
-    list-style-type: none;
-    left: 70px;
-}
-
-.site-bar, .site-bar i, .site-bar a:hover, .site-bar a:active, .site-bar a:visited {
-    color: white;
-    background-color: #34495E;
+.navbar-nav i, .navbar-nav a:hover, .navbar-nav a:active, .navbar-nav a:visited {
+    color: dimgray;
 }
 
