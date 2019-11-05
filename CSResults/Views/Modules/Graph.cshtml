@@ -21,25 +21,32 @@
 
     <div class="form-group row">
 
-        <label for="module" class="col-lg-2 col-form-label">
-            @Html.DisplayNameFor(model => model.resultViewModel.First().module.moduleName)
-        </label>
+        <div class="col-lg-1">
 
-        <div class="col-lg-7 search btn-group">
-            <select id="module" class="form-control">
-                @foreach (var item in Model.modules)
-                {
-                    <option> @Html.DisplayFor(modelItem => item.moduleName)</option>
+         </div>
 
-                }
-            </select>
+            <label for="module" class="col-lg-2 col-form-label pr-2 text-md-left text-lg-right">
+                @Html.DisplayNameFor(model => model.resultViewModel.First().module.moduleName)
+            </label>
+
+
+            <div class="col-lg-6 search pr-0 pl-0">
+                <select id="module" class="form-control">
+                    @foreach (var item in Model.modules)
+                    {
+                        <option> @Html.DisplayFor(modelItem => item.moduleName)</option>
+
+                    }
+                </select>
+            </div>
+
+            <div class="col-lg-2 pl-1">
+                <button type="submit" class="btn btn-success mb-2">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
         </div>
-
-        <div class="col-lg-2">
-            <button type="submit" class="btn btn-primary mb-2">Get Graph</button>
-        </div>
-
-    </div>
 
 </form>
 <canvas id="lineChart"></canvas>
