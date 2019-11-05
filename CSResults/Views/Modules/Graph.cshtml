@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CSResults.Models.ResultsViewModel>
+﻿@model CSResults.Models.ResultsGraphViewModel
 @{
     ViewBag.Title = "Graph";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,18 +9,27 @@
 @{
     var yrs = new List<String>();
     var mean = new List<Double?>();
+    var module_name = Model.resultViewModel.First().module.moduleName.ToString();
 
-    foreach (var item in Model)
+    foreach (var item in Model.resultViewModel)
     {
         yrs.Add(item.result.year);
         mean.Add(item.result.mean);
     }
 }
 
-    
-        <h2>Graph</h2>
-        <canvas id="lineChart"></canvas>
-    
+<h2>Graph</h2>
+<div class="form-group">
+    <label for="module">@Html.DisplayNameFor(model => model.resultViewModel.First().module.moduleName)</label>
+    <select id="module" class="form-control">
+        @foreach (var item in Model.modules)
+        {
+            <option> @Html.DisplayFor(modelItem => item.moduleName)</option> 
+        }
+    </select>
+</div>
+<canvas id="lineChart"></canvas>
+
 
 <script>
 
@@ -33,7 +42,7 @@
     data: {
         labels: @Html.Raw(Json.Encode(yrs)),
         datasets: [{
-            label: 'My First dataset',
+            label: @Html.Raw(Json.Encode(module_name)),
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: @Html.Raw(Json.Encode(mean))
