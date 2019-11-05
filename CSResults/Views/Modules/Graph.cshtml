@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 @{
     var yrs = new List<String>();
     var mean = new List<Double?>();
@@ -19,15 +17,31 @@
 }
 
 <h2>Graph</h2>
-<div class="form-group">
-    <label for="module">@Html.DisplayNameFor(model => model.resultViewModel.First().module.moduleName)</label>
-    <select id="module" class="form-control">
-        @foreach (var item in Model.modules)
-        {
-            <option> @Html.DisplayFor(modelItem => item.moduleName)</option> 
-        }
-    </select>
-</div>
+<form>
+
+    <div class="form-group row">
+
+        <label for="module" class="col-lg-2 col-form-label">
+            @Html.DisplayNameFor(model => model.resultViewModel.First().module.moduleName)
+        </label>
+
+        <div class="col-lg-7 search btn-group">
+            <select id="module" class="form-control">
+                @foreach (var item in Model.modules)
+                {
+                    <option> @Html.DisplayFor(modelItem => item.moduleName)</option>
+
+                }
+            </select>
+        </div>
+
+        <div class="col-lg-2">
+            <button type="submit" class="btn btn-primary mb-2">Get Graph</button>
+        </div>
+
+    </div>
+
+</form>
 <canvas id="lineChart"></canvas>
 
 
