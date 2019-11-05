@@ -21,6 +21,7 @@ namespace CSResults.Controllers
             List<Module> moduleLst = db.Module.ToList();
             List<Result> resultLst = db.Result.ToList();
 
+            //Get all the module and results data
             var modRes = from m in moduleLst
                          join r in resultLst on m.moduleID equals r.modID
                          orderby m.moduleName,r.year descending
@@ -34,12 +35,20 @@ namespace CSResults.Controllers
             List<Module> moduleLst = db.Module.ToList();
             List<Result> resultLst = db.Result.ToList();
 
+
             var modRes = from m in moduleLst
                          join r in resultLst on m.moduleID equals r.modID
                          where m.moduleName == "Introduction to Software Development"
                          select new ResultsViewModel { module = m, result = r };
 
-            return View(modRes);
+            //Save all modules names and the filtered module data to the ResultsGraphViewModel
+            var graphData = new ResultsGraphViewModel
+            {
+                modules = moduleLst.OrderBy(m => m.moduleName),
+                resultViewModel = modRes
+            };
+
+            return View(graphData);
         }
 
         protected override void Dispose(bool disposing)
