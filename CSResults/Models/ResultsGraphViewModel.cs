@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,9 @@ namespace CSResults.Models
     */
     public class ResultsGraphViewModel
     {
+        //To store the moduleID that the user selects
+        [DisplayName("Select a module")]
+        public String moduleID { get; set; }
         public IEnumerable<Module> modules { get; set; }
         public IEnumerable<ResultsViewModel> resultViewModel { get; set; }
     }

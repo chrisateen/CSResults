@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CSResults.DAL;
 using CSResults.Models;
@@ -39,6 +35,29 @@ namespace CSResults.Controllers
             var modRes = from m in moduleLst
                          join r in resultLst on m.moduleID equals r.modID
                          where m.moduleName == "Introduction to Software Development"
+                         select new ResultsViewModel { module = m, result = r };
+
+            //Save all modules names and the filtered module data to the ResultsGraphViewModel
+            var graphData = new ResultsGraphViewModel
+            {
+                modules = moduleLst.OrderBy(m => m.moduleName),
+                resultViewModel = modRes
+            };
+
+            return View(graphData);
+        }
+
+      [HttpPost]
+        public ActionResult Test(ResultsGraphViewModel res)
+        {
+            
+            List<Module> moduleLst = db.Module.ToList();
+            List<Result> resultLst = db.Result.ToList();
+
+
+            var modRes = from m in moduleLst
+                         join r in resultLst on m.moduleID equals r.modID
+                         where m.moduleID == res.moduleID
                          select new ResultsViewModel { module = m, result = r };
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
