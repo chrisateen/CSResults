@@ -133,7 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="DAL\ModuleContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,8 +206,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Result.cshtml" />
-    <Content Include="Views\Modules\Index.cshtml" />
-    <Content Include="Views\Modules\Graph.cshtml" />
+    <Content Include="Views\Data\Table.cshtml" />
+    <Content Include="Views\Data\Module.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

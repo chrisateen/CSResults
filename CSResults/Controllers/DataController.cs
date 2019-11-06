@@ -7,17 +7,17 @@ using CSResults.Models;
 
 namespace CSResults.Controllers
 {
-    public class ModulesController : Controller
+    public class DataController : Controller
     {
         private ModuleContext db = new ModuleContext();
 
-        public ActionResult Index()
+        public ActionResult Table()
         {
 
             List<Module> moduleLst = db.Module.ToList();
             List<Result> resultLst = db.Result.ToList();
 
-            //Get all the module and results data
+            //Get all the module and results data to put in a table in view
             var modRes = from m in moduleLst
                          join r in resultLst on m.moduleID equals r.modID
                          orderby m.moduleName,r.year descending
@@ -26,8 +26,9 @@ namespace CSResults.Controllers
             return View(modRes);
         }
 
-        public ActionResult Graph()
+        public ActionResult ModuleDefault()
         {
+
             List<Module> moduleLst = db.Module.ToList();
             List<Result> resultLst = db.Result.ToList();
 
@@ -44,13 +45,13 @@ namespace CSResults.Controllers
                 resultViewModel = modRes
             };
 
-            return View(graphData);
+            return View("Module",graphData);
         }
 
-      [HttpPost]
-        public ActionResult Test(ResultsGraphViewModel res)
+        [HttpPost]
+        public ActionResult Module(ResultsGraphViewModel res)
         {
-            
+
             List<Module> moduleLst = db.Module.ToList();
             List<Result> resultLst = db.Result.ToList();
 
@@ -69,6 +70,7 @@ namespace CSResults.Controllers
 
             return View(graphData);
         }
+
 
         protected override void Dispose(bool disposing)
         {

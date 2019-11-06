@@ -1,6 +1,6 @@
 ﻿@model CSResults.Models.ResultsGraphViewModel
 @{
-    ViewBag.Title = "Graph";
+    ViewBag.Title = "Module result over time";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,7 +23,7 @@
 
 <div class="form-group row">
 
-    @using (Html.BeginForm("Test", "Modules", FormMethod.Post, new { @class = "form-inline ml-2 col-11 justify-content-center" }))
+    @using (Html.BeginForm("Module", "Data", FormMethod.Post, new { @class = "form-inline ml-2 col-11 justify-content-center" }))
     {
         <label for="module" class="pr-2 pl-2">
             @Html.DisplayNameFor(model => model.moduleID)
