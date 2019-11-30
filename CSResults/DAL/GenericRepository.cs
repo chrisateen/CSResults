@@ -11,22 +11,52 @@ namespace CSResults.DAL
     {
         private ModuleContext context;
         private DbSet<T> dbSet;
+        private IQueryable<T> query;
 
-        public GenericRepository(ModuleContext context)
+        public GenericRepository()
         {
-            this.context = context;
+            this.context = new ModuleContext();
             this.dbSet = context.Set<T>();
+            this.query = dbSet;
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                        params Expression<Func<T, object>>[] includes)
         {
-            return dbSet.ToList();
+            //Checks if we have objects to include/merge into our query
+            if (includes.Length > 0)
+            {
+                foreach (var include in includes)
+                {
+                    query = dbSet.Include(include);
+                }
+
+            }
+
+            //Orders the query if there is an orderby specifed
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return query.ToList();
+            
+            
         }
 
         public IEnumerable<T> Get(
                         Expression<Func<T, bool>> filter = null,
-                        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+                        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                        params Expression<Func<T, object>>[] includes)
         {
-            IQueryable<T> query = dbSet;
+
+            //Checks if we have objects to include/merge into our query
+            if (includes.Length > 0)
+            {
+                foreach (var include in includes)
+                {
+                    query = dbSet.Include(include);
+                }
+            }
 
             //Filter the query if there is a filter condition
             if (filter != null)
@@ -37,13 +67,10 @@ namespace CSResults.DAL
             //Order the query if there is an orderby condition
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                query = orderBy(query);
             }
-            //If there is no orderBy specifed return the unordered query
-            else
-            {
-                return query.ToList();
-            }
+
+            return query.ToList();
         }
 
     }

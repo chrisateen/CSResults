@@ -9,10 +9,12 @@ namespace CSResults.DAL
 {
     public interface IGenericRepository<T> where T:class
     {
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                params Expression<Func<T, object>>[] includes);
 
         IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            params Expression<Func<T, object>>[] includes);
     }
 }

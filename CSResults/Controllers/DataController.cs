@@ -10,26 +10,33 @@ namespace CSResults.Controllers
 {
     public class DataController : Controller
     {
-        private ModuleContext db = new ModuleContext();
+        private IGenericRepository<Module> module;
+        private IGenericRepository<Result> result;
+
+        public DataController()
+        {
+            this.module = new GenericRepository<Module>();
+            this.result = new GenericRepository<Result>();
+        }
 
         public ActionResult Table()
         {
-
-            var res = db.Result.Include(m => m.Module).OrderBy(r => r.modName);
+            //Gets all the results
+            var res = result.GetAll(x => x.OrderBy(r => r.Module.moduleName),x => x.Module);
  
-            return View(res.ToList());
+            return View(res);
         }
 
         public ActionResult ModuleDefault()
         {
-
-            var res = db.Result.Include(m => m.Module).
-                                Where(m => m.modName == "Introduction to Software Development");
+            //Returns results for Introduction to Software Development if no option is selected
+            //or when loading the page before the user is able to slect an option
+            var res = result.Get(m => m.modName == "Introduction to Software Development",null, x => x.Module);
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
             var graphData = new ResultsGraphViewModel
             {
-                modules = db.Module.OrderBy(m => m.moduleName),
+                modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
                 Result = res
             };
 
@@ -39,12 +46,13 @@ namespace CSResults.Controllers
         [HttpPost]
         public ActionResult Module(ResultsGraphViewModel resFilter)
         {
-            var res = db.Result.Include(m => m.Module).Where(m => m.moduleID == resFilter.moduleID);
+            //Gets the module selected by the user
+            var res = result.Get(m => m.moduleID == resFilter.moduleID, null, x => x.Module);
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
             var graphData = new ResultsGraphViewModel
             {
-                modules = db.Module.OrderBy(m => m.moduleName),
+                modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
                 Result = res
             };
 
@@ -55,27 +63,19 @@ namespace CSResults.Controllers
         [HttpGet]
         public ActionResult Module(string id)
         {
-            var res = db.Result.Include(m => m.Module).Where(m => m.moduleID == id);
+            //Gets the module inputted into the URL
+            var res = result.Get(m => m.moduleID == id, null, x => x.Module);
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
             var graphData = new ResultsGraphViewModel
             {
-                modules = db.Module.OrderBy(m => m.moduleName),
+                modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
                 Result = res
             };
 
             return View(graphData);
         }
 
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 
 }
