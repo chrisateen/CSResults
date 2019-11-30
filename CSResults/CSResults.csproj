@@ -141,25 +141,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LoadData\LoadExceltoDB.cs" />
-    <Compile Include="Migrations\201910110024128_InitialCreate.cs" />
-    <Compile Include="Migrations\201910110024128_InitialCreate.Designer.cs">
-      <DependentUpon>201910110024128_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910110041564_InitialTestData.cs" />
-    <Compile Include="Migrations\201910110041564_InitialTestData.Designer.cs">
-      <DependentUpon>201910110041564_InitialTestData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910112226481_seedTest.cs" />
-    <Compile Include="Migrations\201910112226481_seedTest.Designer.cs">
-      <DependentUpon>201910112226481_seedTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910131505466_Add virtual Module in Result.cs" />
-    <Compile Include="Migrations\201910131505466_Add virtual Module in Result.Designer.cs">
-      <DependentUpon>201910131505466_Add virtual Module in Result.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911301420243_ComplexDataModel.cs" />
-    <Compile Include="Migrations\201911301420243_ComplexDataModel.Designer.cs">
-      <DependentUpon>201911301420243_ComplexDataModel.cs</DependentUpon>
+    <Compile Include="Migrations\201911301524363_Initial.cs" />
+    <Compile Include="Migrations\201911301524363_Initial.Designer.cs">
+      <DependentUpon>201911301524363_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Module.cs" />
@@ -224,24 +208,12 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910110024128_InitialCreate.resx">
-      <DependentUpon>201910110024128_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910110041564_InitialTestData.resx">
-      <DependentUpon>201910110041564_InitialTestData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910112226481_seedTest.resx">
-      <DependentUpon>201910112226481_seedTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910131505466_Add virtual Module in Result.resx">
-      <DependentUpon>201910131505466_Add virtual Module in Result.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911301420243_ComplexDataModel.resx">
-      <DependentUpon>201911301420243_ComplexDataModel.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <EmbeddedResource Include="Migrations\201911301524363_Initial.resx">
+      <DependentUpon>201911301524363_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

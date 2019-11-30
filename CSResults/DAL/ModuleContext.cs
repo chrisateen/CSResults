@@ -23,7 +23,7 @@ namespace CSResults.DAL
             modelBuilder.Entity<Result>()
                 .HasRequired<Module>(r => r.Module)
             .WithMany(m => m.Results)
-            .HasForeignKey<String>(m => m.modID);
+            .HasForeignKey<String>(m => m.moduleID);
         }
     }
 }

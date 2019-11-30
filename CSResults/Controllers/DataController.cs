@@ -14,14 +14,8 @@ namespace CSResults.Controllers
         public ActionResult Table()
         {
 
-            List<Module> moduleLst = db.Module.ToList();
-            List<Result> resultLst = db.Result.ToList();
-
-            //Get all the module and results data to put in a table in view
-            var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.modID
-                         orderby m.moduleName,r.year descending
-                         select new ResultsViewModel { module = m, result = r };
+            var modRes = db.Result;
+ 
 
             return View(modRes);
         }
@@ -34,7 +28,7 @@ namespace CSResults.Controllers
 
 
             var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.modID
+                         join r in resultLst on m.moduleID equals r.moduleID
                          where m.moduleName == "Introduction to Software Development"
                          select new ResultsViewModel { module = m, result = r };
 
@@ -57,7 +51,7 @@ namespace CSResults.Controllers
 
 
             var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.modID
+                         join r in resultLst on m.moduleID equals r.moduleID
                          where m.moduleID == res.moduleID
                          select new ResultsViewModel { module = m, result = r };
 
@@ -80,7 +74,7 @@ namespace CSResults.Controllers
 
 
             var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.modID
+                         join r in resultLst on m.moduleID equals r.moduleID
                          where m.moduleID == id
                          select new ResultsViewModel { module = m, result = r };
 

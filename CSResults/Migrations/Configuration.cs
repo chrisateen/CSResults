@@ -1,14 +1,12 @@
 namespace CSResults.Migrations
 {
     using CSResults.LoadData;
-    using CSResults.Models;
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.IO;
-
-
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CSResults.DAL.ModuleContext>
     {
@@ -16,7 +14,6 @@ namespace CSResults.Migrations
         {
             AutomaticMigrationsEnabled = false;
         }
-
         protected override void Seed(CSResults.DAL.ModuleContext context)
         {
             //Debugger added to enable me to debug the seed method
@@ -38,7 +35,7 @@ namespace CSResults.Migrations
 
 
             IDictionary<string, string> resultHeaders = new Dictionary<string, string>() {
-                                                {"Module Code","modID"},
+                                                {"Module Code","moduleID"},
                                                 {"Module Name", "modName"},
                                                 {"Year","year"},
                                                 {"Average","mean" },
@@ -61,10 +58,10 @@ namespace CSResults.Migrations
                     LoadExceltoDB.saveModule(row, context);
 
                     //Saves the data for the results table
-                    LoadExceltoDB.saveResult(row,context, resultHeaders);
+                    LoadExceltoDB.saveResult(row, context, resultHeaders);
                 }
             }
-            
+
         }
     }
 }

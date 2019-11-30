@@ -90,7 +90,7 @@ namespace CSResults.LoadData
             }
 
             //Adds the module results if it does not exist in the databse
-            context.Result.AddOrUpdate(x => new { x.modID, x.year }, res);
+            context.Result.AddOrUpdate(x => new { x.moduleID, x.year }, res);
             context.SaveChanges();
 
         }

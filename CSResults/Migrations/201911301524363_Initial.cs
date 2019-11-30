@@ -3,7 +3,7 @@ namespace CSResults.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -31,19 +31,18 @@ namespace CSResults.Migrations
                         below70 = c.Double(),
                         below80 = c.Double(),
                         above80 = c.Double(),
-                        modID = c.String(),
-                        Module_moduleID = c.String(maxLength: 128),
+                        moduleID = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.modName, t.year })
-                .ForeignKey("dbo.Modules", t => t.Module_moduleID)
-                .Index(t => t.Module_moduleID);
+                .ForeignKey("dbo.Modules", t => t.moduleID, cascadeDelete: true)
+                .Index(t => t.moduleID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Results", "Module_moduleID", "dbo.Modules");
-            DropIndex("dbo.Results", new[] { "Module_moduleID" });
+            DropForeignKey("dbo.Results", "moduleID", "dbo.Modules");
+            DropIndex("dbo.Results", new[] { "moduleID" });
             DropTable("dbo.Results");
             DropTable("dbo.Modules");
         }
