@@ -157,6 +157,10 @@
     <Compile Include="Migrations\201910131505466_Add virtual Module in Result.Designer.cs">
       <DependentUpon>201910131505466_Add virtual Module in Result.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911301420243_ComplexDataModel.cs" />
+    <Compile Include="Migrations\201911301420243_ComplexDataModel.Designer.cs">
+      <DependentUpon>201911301420243_ComplexDataModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Result.cs" />
@@ -231,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910131505466_Add virtual Module in Result.resx">
       <DependentUpon>201910131505466_Add virtual Module in Result.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911301420243_ComplexDataModel.resx">
+      <DependentUpon>201911301420243_ComplexDataModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

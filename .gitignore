@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /CSResults/DAL/IGenericRepository.cs
 /CSResults/DAL/GenericRepository.cs
+/CSResults.Tests/Controllers/DataControllerTest.cs
