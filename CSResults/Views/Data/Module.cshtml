@@ -8,13 +8,13 @@
     //Data for chart
     var yrs = new List<String>();
     var mean = new List<Double?>();
-    var module_name = Model.resultViewModel.First().module.moduleName.ToString();
+    var module_name = Model.Result.First().modName.ToString();
 
 
-    foreach (var item in Model.resultViewModel)
+    foreach (var item in Model.Result)
     {
-        yrs.Add(item.result.year);
-        mean.Add(item.result.mean);
+        yrs.Add(item.year);
+        mean.Add(item.mean);
     }
 }
 

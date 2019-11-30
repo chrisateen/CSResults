@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using CSResults.DAL;
 using CSResults.Models;
+using System.Data.Entity;
 
 namespace CSResults.Controllers
 {
@@ -14,75 +15,53 @@ namespace CSResults.Controllers
         public ActionResult Table()
         {
 
-            var modRes = db.Result;
+            var res = db.Result.Include(m => m.Module).OrderBy(r => r.modName);
  
-
-            return View(modRes);
+            return View(res.ToList());
         }
 
         public ActionResult ModuleDefault()
         {
 
-            List<Module> moduleLst = db.Module.ToList();
-            List<Result> resultLst = db.Result.ToList();
-
-
-            var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.moduleID
-                         where m.moduleName == "Introduction to Software Development"
-                         select new ResultsViewModel { module = m, result = r };
+            var res = db.Result.Include(m => m.Module).
+                                Where(m => m.modName == "Introduction to Software Development");
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
             var graphData = new ResultsGraphViewModel
             {
-                modules = moduleLst.OrderBy(m => m.moduleName),
-                resultViewModel = modRes
+                modules = db.Module.OrderBy(m => m.moduleName),
+                Result = res
             };
 
-            return View("Module",graphData);
+            return View("Module", graphData);
         }
 
         [HttpPost]
-        public ActionResult Module(ResultsGraphViewModel res)
+        public ActionResult Module(ResultsGraphViewModel resFilter)
         {
-
-            List<Module> moduleLst = db.Module.ToList();
-            List<Result> resultLst = db.Result.ToList();
-
-
-            var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.moduleID
-                         where m.moduleID == res.moduleID
-                         select new ResultsViewModel { module = m, result = r };
+            var res = db.Result.Include(m => m.Module).Where(m => m.moduleID == resFilter.moduleID);
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
             var graphData = new ResultsGraphViewModel
             {
-                modules = moduleLst.OrderBy(m => m.moduleName),
-                resultViewModel = modRes
+                modules = db.Module.OrderBy(m => m.moduleName),
+                Result = res
             };
 
             return View(graphData);
+
         }
 
         [HttpGet]
         public ActionResult Module(string id)
         {
-
-            List<Module> moduleLst = db.Module.ToList();
-            List<Result> resultLst = db.Result.ToList();
-
-
-            var modRes = from m in moduleLst
-                         join r in resultLst on m.moduleID equals r.moduleID
-                         where m.moduleID == id
-                         select new ResultsViewModel { module = m, result = r };
+            var res = db.Result.Include(m => m.Module).Where(m => m.moduleID == id);
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
             var graphData = new ResultsGraphViewModel
             {
-                modules = moduleLst.OrderBy(m => m.moduleName),
-                resultViewModel = modRes
+                modules = db.Module.OrderBy(m => m.moduleName),
+                Result = res
             };
 
             return View(graphData);

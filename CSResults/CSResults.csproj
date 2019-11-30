@@ -149,7 +149,6 @@
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\ResultsGraphViewModel.cs" />
-    <Compile Include="Models\ResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

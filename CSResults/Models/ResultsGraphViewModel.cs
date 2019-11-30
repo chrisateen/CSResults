@@ -16,6 +16,6 @@ namespace CSResults.Models
         [DisplayName("Select a module")]
         public String moduleID { get; set; }
         public IEnumerable<Module> modules { get; set; }
-        public IEnumerable<ResultsViewModel> resultViewModel { get; set; }
+        public IEnumerable<Result> Result { get; set; }
     }
 }
