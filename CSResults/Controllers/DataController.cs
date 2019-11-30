@@ -19,7 +19,14 @@ namespace CSResults.Controllers
             this.result = new GenericRepository<Result>();
         }
 
-        public ActionResult Table()
+        //Constructor for unit Testing
+        public DataController(IGenericRepository<Module> module , IGenericRepository<Result> result)
+        {
+            this.module = module;
+            this.result = result;
+        }
+
+        public ViewResult Table()
         {
             //Gets all the results
             var res = result.GetAll(x => x.OrderBy(r => r.Module.moduleName),x => x.Module);
