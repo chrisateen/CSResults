@@ -28,7 +28,7 @@ namespace CSResults.Tests.Controllers
         }
 
         [Test]
-        public void TableViewContainsResultsModel()
+        public void TableRControllerReturnsListOfResultsToView()
         {
             //Arrange
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
