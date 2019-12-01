@@ -73,7 +73,7 @@ namespace CSResults.Controllers
             if (id == null)
             {
                 return RedirectToAction("ModuleDefault");
-            }
+            } 
             else
             {
                 //Gets the module inputted into the URL
@@ -85,6 +85,11 @@ namespace CSResults.Controllers
                     modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
                     Result = res
                 };
+
+                if (res.Count() == 0)
+                {
+                    return RedirectToAction("ModuleDefault");
+                }
 
                 return View(graphData);
 
