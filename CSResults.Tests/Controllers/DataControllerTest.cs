@@ -13,7 +13,7 @@ namespace CSResults.Tests.Controllers
     public class DataControllerTest
     {
         [Fact]
-        public void TableControllerReturnsView()
+        public void TableControllerReturnsCorrectViewandViewModel()
         {
             // Arrange
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
@@ -25,26 +25,8 @@ namespace CSResults.Tests.Controllers
 
             // Assert
             Assert.NotNull(result);
-            controller.WithCallTo(x => x.Table()).ShouldRenderDefaultView();
-        }
-
-        [Fact]
-        public void TableControllerReturnsListOfResultsToView()
-        {
-            //Arrange
-            Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
-            Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
-
-            DataController dataController = new DataController(mockModule.Object, mockResult.Object);
-
-            //Act
-            var tableController = dataController.Table();
-
-            //Assert
-            var viewResult = Assert.IsType<ViewResult>(tableController);
-            var model = Assert.IsAssignableFrom<IEnumerable<Result>>(
-            viewResult.ViewData.Model);
-
+            controller.WithCallTo(x => x.Table()).ShouldRenderDefaultView().
+                WithModel<Result[]>();
         }
 
         [Fact]
@@ -80,7 +62,8 @@ namespace CSResults.Tests.Controllers
 
             DataController controller = new DataController(mockModule.Object, mockResult.Object);
 
-            controller.WithCallTo(x => x.Module("Mod1")).ShouldRenderDefaultView();
+            controller.WithCallTo(x => x.Module("Mod1")).ShouldRenderDefaultView().
+                WithModel<ResultsGraphViewModel>(); ;
         }
 
         [Fact]
