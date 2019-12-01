@@ -82,5 +82,19 @@ namespace CSResults.Tests.Controllers
 
             controller.WithCallTo(x => x.Module("Mod1")).ShouldRenderDefaultView();
         }
+
+        [Fact]
+        public void SearchModuleIfNullModIdIsPassed()
+        {
+            //Arrange
+            Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
+            Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
+
+            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+
+            string str = null;
+
+            controller.WithCallTo(x => x.Module(str)).ShouldRedirectTo(x => x.ModuleDefault());
+        }
     }
 }

@@ -72,19 +72,24 @@ namespace CSResults.Controllers
         {
             if (id == null)
             {
-                RedirectToAction("ModuleDefault");
+                return RedirectToAction("ModuleDefault");
             }
-            //Gets the module inputted into the URL
-            var res = result.Get(m => m.moduleID == id, null, x => x.Module);
-
-            //Save all modules names and the filtered module data to the ResultsGraphViewModel
-            var graphData = new ResultsGraphViewModel
+            else
             {
-                modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
-                Result = res
-            };
+                //Gets the module inputted into the URL
+                var res = result.Get(m => m.moduleID == id, null, x => x.Module);
 
-            return View(graphData);
+                //Save all modules names and the filtered module data to the ResultsGraphViewModel
+                var graphData = new ResultsGraphViewModel
+                {
+                    modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
+                    Result = res
+                };
+
+                return View(graphData);
+
+            }
+
         }
 
     }
