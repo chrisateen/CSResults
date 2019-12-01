@@ -70,6 +70,10 @@ namespace CSResults.Controllers
         [HttpGet]
         public ActionResult Module(string id)
         {
+            if (id == null)
+            {
+                RedirectToAction("ModuleDefault");
+            }
             //Gets the module inputted into the URL
             var res = result.Get(m => m.moduleID == id, null, x => x.Module);
 

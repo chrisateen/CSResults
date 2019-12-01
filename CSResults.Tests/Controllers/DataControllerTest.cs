@@ -64,5 +64,23 @@ namespace CSResults.Tests.Controllers
             controller.WithCallTo(x => x.ModuleDefault()).ShouldRenderView("Module");
 
         }
+
+        [Fact]
+        public void SearchModuleIfCorrectModIDIsPassed()
+        {
+            //Arrange
+            Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
+            Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
+
+            IEnumerable<Result> res = new List<Result>{
+                new Result { moduleID = "Mod1", modName = "Module 1" }
+            };
+
+            mockResult.Setup(x => x.Get(null, null, null)).Returns(res);
+
+            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+
+            controller.WithCallTo(x => x.Module("Mod1")).ShouldRenderDefaultView();
+        }
     }
 }
