@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CSResults.DAL
 {
-    public class ModuleContext:DbContext
+    public class ModuleContext:DbContext,IModuleContext
     {
         public ModuleContext() : base("ModuleContext")
         {

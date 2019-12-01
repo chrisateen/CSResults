@@ -27,7 +27,7 @@ namespace CSResults.LoadData
                 con.Open();
 
             }
-            catch (OleDbException e)
+            catch (OleDbException)
             {
                 Console.WriteLine("Unable to connect to the excel data file");
             }
@@ -41,7 +41,7 @@ namespace CSResults.LoadData
                 con.Close();
 
             }
-            catch (OleDbException e)
+            catch (OleDbException)
             {
                 Console.WriteLine("Able to connect to excel file but unable to" +
                                     "retrieve data from the file using the SQL command");

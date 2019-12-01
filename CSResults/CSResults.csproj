@@ -130,6 +130,7 @@
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
+    <Compile Include="DAL\IModuleContext.cs" />
     <Compile Include="DAL\ModuleContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

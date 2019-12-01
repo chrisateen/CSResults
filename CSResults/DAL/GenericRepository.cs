@@ -10,23 +10,27 @@ namespace CSResults.DAL
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private ModuleContext context;
-        private DbSet<T> dbSet;
-        private IQueryable<T> query;
 
         public GenericRepository()
         {
             this.context = new ModuleContext();
-            this.dbSet = context.Set<T>();
-            this.query = dbSet;
         }
 
-        public IEnumerable<T> GetAll()
+        public GenericRepository(ModuleContext context)
         {
-            return dbSet.ToList();
+            this.context = context;
+        }
+
+        public IEnumerable<T> Get()
+        {
+            return context.Set<T>().ToList();
         }
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                         params Expression<Func<T, object>>[] includes)
         {
+            DbSet<T> dbSet = context.Set<T>();
+            IQueryable<T> query = dbSet;
+
             //Checks if we have objects to include/merge into our query
             if (includes.Length > 0)
             {
@@ -53,6 +57,8 @@ namespace CSResults.DAL
                         Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                         params Expression<Func<T, object>>[] includes)
         {
+            DbSet<T> dbSet = context.Set<T>();
+            IQueryable<T> query = dbSet;
 
             //Checks if we have objects to include/merge into our query
             if (includes.Length > 0)
