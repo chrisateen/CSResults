@@ -6,13 +6,14 @@ using CSResults.DAL;
 using CSResults.Models;
 using System.Linq;
 using System.Collections.Generic;
+using TestStack.FluentMVCTesting;
 
 namespace CSResults.Tests.Controllers
 {
     public class DataControllerTest
     {
         [Fact]
-        public void Table()
+        public void TableControllerReturnsView()
         {
             // Arrange
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
@@ -24,10 +25,11 @@ namespace CSResults.Tests.Controllers
 
             // Assert
             Assert.NotNull(result);
+            controller.WithCallTo(x => x.Table()).ShouldRenderDefaultView();
         }
 
         [Fact]
-        public void TableRControllerReturnsListOfResultsToView()
+        public void TableControllerReturnsListOfResultsToView()
         {
             //Arrange
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
@@ -42,6 +44,24 @@ namespace CSResults.Tests.Controllers
             var viewResult = Assert.IsType<ViewResult>(tableController);
             var model = Assert.IsAssignableFrom<IEnumerable<Result>>(
             viewResult.ViewData.Model);
+
+        }
+
+        [Fact]
+        public void ModuleDefaultReturnsModuleView()
+        {
+            //Arrange
+            Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
+            Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
+
+            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+
+            // Act
+            ViewResult result = controller.Table() as ViewResult;
+
+            // Assert
+            Assert.NotNull(result);
+            controller.WithCallTo(x => x.ModuleDefault()).ShouldRenderView("Module");
 
         }
     }
