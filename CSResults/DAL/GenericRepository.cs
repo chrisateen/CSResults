@@ -19,6 +19,11 @@ namespace CSResults.DAL
             this.dbSet = context.Set<T>();
             this.query = dbSet;
         }
+
+        public IEnumerable<T> GetAll()
+        {
+            return dbSet.ToList();
+        }
         public IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                         params Expression<Func<T, object>>[] includes)
         {

@@ -12,6 +12,7 @@ namespace CSResults.DAL
         IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                 params Expression<Func<T, object>>[] includes);
 
+        IEnumerable<T> GetAll();
         IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

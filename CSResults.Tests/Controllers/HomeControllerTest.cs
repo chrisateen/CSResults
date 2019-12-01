@@ -1,13 +1,12 @@
 ﻿using System.Web.Mvc;
 using CSResults.Controllers;
-using NUnit.Framework;
+using Xunit;
 
 namespace CSResults.Tests.Controllers
 {
-    [TestFixture]
     public class HomeControllerTest
     {
-        [Test]
+        [Fact]
         public void Index()
         {
             // Arrange
@@ -17,7 +16,7 @@ namespace CSResults.Tests.Controllers
             ViewResult result = controller.Index() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
     }
 }
