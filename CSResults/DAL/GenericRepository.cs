@@ -81,7 +81,8 @@ namespace CSResults.DAL
                 query = orderBy(query);
             }
 
-            return query.ToList();
+            var res = query.ToList();
+            return res;
         }
 
     }
