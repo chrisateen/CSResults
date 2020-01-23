@@ -61,7 +61,9 @@ namespace CSResults.Tests.Controllers
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
             Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
 
-            mockResult.Setup(i => i.Get(m => m.moduleID == "Mod1", null, x => x.Module)).Returns(data);
+            mockResult.Setup(i => i.Get(It.IsAny<Expression<Func<Result, bool>>>(),
+                It.IsAny<Func<IQueryable<Result>, IOrderedQueryable<Result>>>(), 
+                It.IsAny<Expression<Func<Result, object>>[]>())).Returns(data).Verifiable();
 
             DataController controller = new DataController(mockModule.Object, mockResult.Object);
 
@@ -80,6 +82,26 @@ namespace CSResults.Tests.Controllers
             DataController controller = new DataController(mockModule.Object, mockResult.Object);
 
             string str = null;
+
+            controller.WithCallTo(x => x.Module(str)).ShouldRedirectTo(x => x.ModuleDefault());
+        }
+
+        [Fact]
+        public void SearchModuleIfModIDDoesNotExist()
+        {
+            var data = new List<Result>{
+            };
+            //Arrange
+            Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
+            Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
+
+            mockResult.Setup(i => i.Get(It.IsAny<Expression<Func<Result, bool>>>(),
+                                        It.IsAny<Func<IQueryable<Result>, IOrderedQueryable<Result>>>(),
+                                        It.IsAny<Expression<Func<Result, object>>[]>())).Returns(data).Verifiable();
+
+            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+
+            string str = "Mod1";
 
             controller.WithCallTo(x => x.Module(str)).ShouldRedirectTo(x => x.ModuleDefault());
         }
