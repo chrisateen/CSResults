@@ -13,12 +13,6 @@ namespace CSResults.Controllers
         private IGenericRepository<Module> module;
         private IGenericRepository<Result> result;
 
-        public DataController()
-        {
-            this.module = new GenericRepository<Module>();
-            this.result = new GenericRepository<Result>();
-        }
-
         //Constructor for unit Testing
         public DataController(IGenericRepository<Module> module , IGenericRepository<Result> result)
         {

@@ -6,6 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Autofac;
+using Autofac.Integration.Mvc;
+using CSResults.Controllers;
+using CSResults.DAL;
+using CSResults.Models;
 
 namespace CSResults
 {
@@ -17,6 +22,13 @@ namespace CSResults
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var builder = new ContainerBuilder();
+
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }
