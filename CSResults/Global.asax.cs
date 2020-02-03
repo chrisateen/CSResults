@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Reflection;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
@@ -27,7 +29,12 @@ namespace CSResults
 
             builder.RegisterType<ResultsGraphViewModel>();
 
-            builder.RegisterType<ModuleContext>();
+            //Register the context class
+            var dataAccess = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(dataAccess)
+               .Where(t => t.Name.EndsWith("Context"))
+               .As<DbContext>();
 
             builder.RegisterFilterProvider();
 
