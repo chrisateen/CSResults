@@ -26,15 +26,17 @@ namespace CSResults
 
             //Register my Generic Repository classes
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>));
-
-            builder.RegisterType<ResultsGraphViewModel>();
-
-            //Register the context class
+            
             var dataAccess = Assembly.GetExecutingAssembly();
 
+            //Register the context class
             builder.RegisterAssemblyTypes(dataAccess)
                .Where(t => t.Name.EndsWith("Context"))
                .As<DbContext>();
+
+            //Register my ViewModel classes
+            builder.RegisterAssemblyTypes(dataAccess)
+               .Where(t => t.Name.EndsWith("ViewModel"));
 
             builder.RegisterFilterProvider();
 

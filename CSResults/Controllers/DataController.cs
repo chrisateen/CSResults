@@ -14,7 +14,6 @@ namespace CSResults.Controllers
         private IGenericRepository<Result> result;
         public ResultsGraphViewModel resultsGraphViewModel;
 
-        //Constructor for unit Testing
         public DataController(IGenericRepository<Module> module , 
                                 IGenericRepository<Result> result, ResultsGraphViewModel resultsGraphViewModel)
         {
