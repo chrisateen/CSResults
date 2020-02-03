@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using CSResults.Controllers;
 using CSResults.DAL;
 using CSResults.Models;
@@ -25,10 +27,19 @@ namespace CSResults
 
             var builder = new ContainerBuilder();
 
+            //Register all MVC controllers
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            //Register my Generic Repository classes
+            builder.RegisterType<GenericRepository<Result>>().As<IGenericRepository<Result>>();
+            builder.RegisterType<GenericRepository<Models.Module>>().As<IGenericRepository<Models.Module>>();
+
+
+            builder.RegisterFilterProvider();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
         }
     }
 }
