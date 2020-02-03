@@ -25,6 +25,8 @@ namespace CSResults
             //Register my Generic Repository classes
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>));
 
+            builder.RegisterType<ResultsGraphViewModel>();
+
             builder.RegisterFilterProvider();
 
             var container = builder.Build();
