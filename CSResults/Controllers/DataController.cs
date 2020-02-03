@@ -12,12 +12,15 @@ namespace CSResults.Controllers
     {
         private IGenericRepository<Module> module;
         private IGenericRepository<Result> result;
+        public ResultsGraphViewModel resultsGraphViewModel;
 
         //Constructor for unit Testing
-        public DataController(IGenericRepository<Module> module , IGenericRepository<Result> result)
+        public DataController(IGenericRepository<Module> module , 
+                                IGenericRepository<Result> result, ResultsGraphViewModel resultsGraphViewModel)
         {
             this.module = module;
             this.result = result;
+            this.resultsGraphViewModel = resultsGraphViewModel;
         }
 
         public ViewResult Table()
@@ -50,14 +53,19 @@ namespace CSResults.Controllers
             //Gets the module selected by the user
             var res = result.Get(m => m.moduleID == resFilter.moduleID, null, x => x.Module);
 
-            //Save all modules names and the filtered module data to the ResultsGraphViewModel
-            var graphData = new ResultsGraphViewModel
-            {
-                modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
-                Result = res
-            };
+            resultsGraphViewModel.modules = module.GetAll(x => x.OrderBy(r => r.moduleName));
+            resultsGraphViewModel.Result = res;
 
-            return View(graphData);
+            //Save all modules names and the filtered module data to the ResultsGraphViewModel
+            //var graphData = new ResultsGraphViewModel
+            //{
+            //    modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
+            //    Result = res
+            //};
+
+            //return View(graphData);
+
+            return View(resultsGraphViewModel);
 
         }
 
