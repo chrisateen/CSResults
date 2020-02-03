@@ -38,13 +38,10 @@ namespace CSResults.Controllers
             var res = result.Get(m => m.modName == "Introduction to Software Development",null, x => x.Module);
 
             //Save all modules names and the filtered module data to the ResultsGraphViewModel
-            var graphData = new ResultsGraphViewModel
-            {
-                modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
-                Result = res
-            };
+            resultsGraphViewModel.modules = module.GetAll(x => x.OrderBy(r => r.moduleName));
+            resultsGraphViewModel.Result = res;
 
-            return View("Module", graphData);
+            return View("Module", resultsGraphViewModel);
         }
 
         [HttpPost]
@@ -53,17 +50,9 @@ namespace CSResults.Controllers
             //Gets the module selected by the user
             var res = result.Get(m => m.moduleID == resFilter.moduleID, null, x => x.Module);
 
+            //Save all modules names and the filtered module data to the ResultsGraphViewModel
             resultsGraphViewModel.modules = module.GetAll(x => x.OrderBy(r => r.moduleName));
             resultsGraphViewModel.Result = res;
-
-            //Save all modules names and the filtered module data to the ResultsGraphViewModel
-            //var graphData = new ResultsGraphViewModel
-            //{
-            //    modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
-            //    Result = res
-            //};
-
-            //return View(graphData);
 
             return View(resultsGraphViewModel);
 
@@ -72,6 +61,7 @@ namespace CSResults.Controllers
         [HttpGet]
         public ActionResult Module(string id)
         {
+            //If no module is passed into the URL go to the default graph
             if (id == null)
             {
                 return RedirectToAction("ModuleDefault");
@@ -82,18 +72,16 @@ namespace CSResults.Controllers
                 var res = result.Get(m => m.moduleID == id, null, x => x.Module);
 
                 //Save all modules names and the filtered module data to the ResultsGraphViewModel
-                var graphData = new ResultsGraphViewModel
-                {
-                    modules = module.GetAll(x => x.OrderBy(r => r.moduleName)),
-                    Result = res
-                };
+                resultsGraphViewModel.modules = module.GetAll(x => x.OrderBy(r => r.moduleName));
+                resultsGraphViewModel.Result = res;
 
+                //If module cannot be found go to the default graph
                 if (res.Count() == 0)
                 {
                     return RedirectToAction("ModuleDefault");
                 }
 
-                return View(graphData);
+                return View(resultsGraphViewModel);
 
             }
 
