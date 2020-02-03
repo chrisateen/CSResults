@@ -11,10 +11,10 @@ namespace CSResults.DAL
     {
         private ModuleContext context;
 
-        public GenericRepository()
-        {
-            this.context = new ModuleContext();
-        }
+        //public GenericRepository()
+        //{
+        //    this.context = new ModuleContext();
+        //}
 
         public GenericRepository(ModuleContext context)
         {

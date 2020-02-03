@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSResults.DAL
 {
-    public interface IGenericRepository<T> where T:class
+    public interface IGenericRepository<T> where T : class
     {
         IEnumerable<T> GetAll(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                 params Expression<Func<T, object>>[] includes);
