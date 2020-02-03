@@ -27,6 +27,8 @@ namespace CSResults
 
             builder.RegisterType<ResultsGraphViewModel>();
 
+            builder.RegisterType<ModuleContext>();
+
             builder.RegisterFilterProvider();
 
             var container = builder.Build();
