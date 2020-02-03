@@ -23,9 +23,7 @@ namespace CSResults
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             //Register my Generic Repository classes
-            builder.RegisterType<GenericRepository<Result>>().As<IGenericRepository<Result>>();
-            builder.RegisterType<GenericRepository<Models.Module>>().As<IGenericRepository<Models.Module>>();
-
+            builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>));
 
             builder.RegisterFilterProvider();
 
