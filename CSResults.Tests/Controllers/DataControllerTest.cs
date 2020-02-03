@@ -15,13 +15,16 @@ namespace CSResults.Tests.Controllers
 {
     public class DataControllerTest
     {
+        ResultsGraphViewModel resultsGraphViewModel = new ResultsGraphViewModel();
+
         [Fact]
         public void TableControllerReturnsCorrectViewandViewModel()
         {
             // Arrange
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
             Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
-            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+            DataController controller = 
+                new DataController(mockModule.Object, mockResult.Object, resultsGraphViewModel);
 
             // Act
             ViewResult result = controller.Table() as ViewResult;
@@ -39,7 +42,8 @@ namespace CSResults.Tests.Controllers
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
             Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
 
-            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+            DataController controller = 
+                new DataController(mockModule.Object, mockResult.Object, resultsGraphViewModel);
 
             // Act
             ViewResult result = controller.Table() as ViewResult;
@@ -65,7 +69,10 @@ namespace CSResults.Tests.Controllers
                 It.IsAny<Func<IQueryable<Result>, IOrderedQueryable<Result>>>(), 
                 It.IsAny<Expression<Func<Result, object>>[]>())).Returns(data).Verifiable();
 
-            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+            
+
+            DataController controller = 
+                new DataController(mockModule.Object, mockResult.Object,resultsGraphViewModel);
 
             controller.WithCallTo(x => x.Module("Mod1")).ShouldRenderDefaultView().
                 WithModel<ResultsGraphViewModel>(); ;
@@ -79,7 +86,8 @@ namespace CSResults.Tests.Controllers
             Mock<IGenericRepository<Result>> mockResult = new Mock<IGenericRepository<Result>>();
             Mock<IGenericRepository<Module>> mockModule = new Mock<IGenericRepository<Module>>();
 
-            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+            DataController controller = 
+                new DataController(mockModule.Object, mockResult.Object,resultsGraphViewModel);
 
             string str = null;
 
@@ -99,7 +107,8 @@ namespace CSResults.Tests.Controllers
                                         It.IsAny<Func<IQueryable<Result>, IOrderedQueryable<Result>>>(),
                                         It.IsAny<Expression<Func<Result, object>>[]>())).Returns(data).Verifiable();
 
-            DataController controller = new DataController(mockModule.Object, mockResult.Object);
+            DataController controller = 
+                new DataController(mockModule.Object, mockResult.Object,resultsGraphViewModel);
 
             string str = "Mod1";
 
