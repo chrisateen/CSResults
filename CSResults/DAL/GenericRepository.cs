@@ -9,14 +9,9 @@ namespace CSResults.DAL
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private ModuleContext context;
+        private DbContext context;
 
-        //public GenericRepository()
-        //{
-        //    this.context = new ModuleContext();
-        //}
-
-        public GenericRepository(ModuleContext context)
+        public GenericRepository(DbContext context)
         {
             this.context = context;
         }
