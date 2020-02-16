@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using CSResultsCore.Models;
 
 
-namespace CSResults.DAL
+namespace CSResultsCore.Models
 {
     public class ModuleContext:DbContext
     {
