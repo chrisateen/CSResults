@@ -15,6 +15,8 @@ namespace CSResultsCore.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Result>()
+                .HasKey(r => new { r.moduleName,r.year });
 
             modelBuilder.Entity<Result>()
                 .HasOne<Module>(r => r.Module)
