@@ -19,9 +19,11 @@ namespace CSResultsCore.Controllers
             _result = result;
         }
 
-        public string Index()
+        public ActionResult Index()
         {
-            return "Hello World from Data Controller";
+            IList<int> intList = new List<int>() { 10, 20, 30, 40 };
+
+            return Ok(intList);
         }
     }
 }
