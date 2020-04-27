@@ -8,9 +8,10 @@ namespace CSResultsCore.Controllers
 {
     public class HomeController : Controller
     {
-        public String Index()
+        public String Index(int id)
         {
-            return "Hello World";
+            return "Hello World" + id;
         }
     }
 }
+
