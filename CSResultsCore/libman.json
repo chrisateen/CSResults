@@ -13,6 +13,19 @@
     {
       "library": "Chart.js@2.9.3",
       "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "library": "twitter-bootstrap@4.4.0",
+      "destination": "wwwroot/lib/twitter-bootstrap/",
+      "files": [
+        "js/bootstrap.min.js",
+        "css/bootstrap.min.css"
+      ]
     }
-  ]
+  ,
+{
+  "library": "popper.js@2.3.3",
+  "destination": "wwwroot/lib/popper.js/"
+}
+]
 }
