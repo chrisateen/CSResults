@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Formatting.Json;
 
 namespace CSResultsCore
 {
@@ -13,24 +15,38 @@ namespace CSResultsCore
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .WriteTo.File(new JsonFormatter(), "log.json")
+                .CreateLogger();
+            try
+            {
+                Log.Information("Starting the Web Application");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+
+                Log.Fatal(ex,"Web Application terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureLogging((context,logging) =>
-                {
-                    // removes all the default providers
-                    logging.ClearProviders();
-                    //Gets logging configuration from the appsettings.json file
-                    logging.AddConfiguration(context.Configuration.GetSection("Logging"));
-                    logging.AddConsole();
-                    logging.AddDebug();
-                }
-                )
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseSerilog();
+
     }
 }

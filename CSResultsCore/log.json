@@ -1,0 +1,4 @@
+
+{"Timestamp":"2020-05-02T16:45:41.2992190+01:00","Level":"Information","MessageTemplate":"Starting the Web Application"}
+{"Timestamp":"2020-05-02T16:45:43.0637156+01:00","Level":"Information","MessageTemplate":"Home log message","Properties":{"SourceContext":"CSResultsCore.Controllers.HomeController","ActionId":"062aeed8-2d0f-44b3-a431-1756f8458a43","ActionName":"CSResultsCore.Controllers.HomeController.Index (CSResultsCore)","RequestId":"0HLVELVFI642R:00000001","RequestPath":"/","SpanId":"|38797156-491e6728adeda6d2.","TraceId":"38797156-491e6728adeda6d2","ParentId":""}}
+
