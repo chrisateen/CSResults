@@ -14,8 +14,8 @@ namespace CSResults.DAL
             Database.SetInitializer<ModuleContext>(new CreateDatabaseIfNotExists<ModuleContext>());
         }
 
-        public DbSet<Module> Module { get; set; }
-        public DbSet<Result> Result { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
+        public virtual DbSet<Result> Result { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

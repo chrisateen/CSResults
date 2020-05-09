@@ -104,6 +104,8 @@ namespace CSResults.Tests.Controllers
             string str = null;
 
             controller.WithCallTo(x => x.Module(str)).ShouldRedirectTo(x => x.ModuleDefault());
+           
         }
+
     }
 }
